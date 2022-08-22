@@ -1,0 +1,25 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: crawlerService
+  cloud:
+    nacos:
+      server-addr: 121.5.69.88:8848 # nacos服务地址
+      discovery:
+        ip: 121.5.69.88 # 此服务的公网ip
+  boot:
+    admin:
+      client:
+        url: http://121.5.69.88:3795
+
+#监控配置 开启所有监控
+management:
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
