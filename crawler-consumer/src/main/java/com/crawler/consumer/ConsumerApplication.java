@@ -1,6 +1,5 @@
 package com.crawler.consumer;
 
-import com.crawler.consumer.clients.CrawlerClient;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -13,8 +12,9 @@ public class ConsumerApplication {
     static ConfigurableApplicationContext context;
 
     public static void postMain() {
-        CrawlerClient bean = context.getBean(CrawlerClient.class);
-        System.out.println(bean.getHelloWord());
+        // CrawlerClient bean = context.getBean(CrawlerClient.class);
+        // System.out.println("\n\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n\n");
+        // System.out.println(bean.getHelloWord());
     }
 
 

@@ -13,6 +13,17 @@ spring:
       client:
         url: http://121.5.69.88:3795
 
+
+feign:
+  client:
+    config:
+      default:
+        logger-level: basic
+        connectTimeout: 200000
+        readTimeout: 200000
+
+
+
 #监控配置 开启所有监控
 management:
   endpoints:

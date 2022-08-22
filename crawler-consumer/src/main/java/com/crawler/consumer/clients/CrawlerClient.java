@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @FeignClient("crawlerService")
 public interface CrawlerClient {
 
-    @GetMapping("/")
+    @GetMapping()
     String getHelloWord();
 
 
