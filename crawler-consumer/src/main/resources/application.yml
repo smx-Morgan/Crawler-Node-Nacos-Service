@@ -18,9 +18,14 @@ feign:
   client:
     config:
       default:
-        logger-level: basic
+        logger-level: BASIC  # 日志级别
         connectTimeout: 200000
         readTimeout: 200000
+  httpclient:
+    enabled: true
+    max-connections: 200
+    max-connections-per-route: 50
+    connection-timeout: 200000
 
 
 
