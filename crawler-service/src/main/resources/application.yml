@@ -7,7 +7,7 @@ spring:
     nacos:
       server-addr: 121.5.69.88:8848 # nacos服务地址
       discovery:
-        ip: 120.25.2.146 # 此服务的公网ip
+        ip: 121.5.69.88 # 此服务的公网ip
   boot:
     admin:
       client:

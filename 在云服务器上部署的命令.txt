@@ -1,0 +1,38 @@
+# ------kill------
+lsof -i:8081
+kill -9 p
+
+# ---node1---
+nohup java -jar crawler-service.jar \
+--server.port=8081 \
+> crawler-8081.txt &
+		
+nohup java -jar crawler-service.jar \
+--server.port=8082 \
+> crawler-8082.txt &
+
+nohup java -jar admin-server.jar \
+--server.port=3795 \
+> admin.txt &
+
+# ---node2---
+nohup java -jar crawler-service.jar \
+--server.port=8081 \
+--spring.cloud.nacos.discovery.ip=114.115.233.128 \
+> crawler-8081.txt &
+		
+nohup java -jar crawler-service.jar \
+--server.port=8082 \
+--spring.cloud.nacos.discovery.ip=114.115.233.128 \
+> crawler-8082.txt &
+		
+# ---node3---
+nohup java -jar crawler-service.jar \
+--server.port=8081 \
+--spring.cloud.nacos.discovery.ip=120.25.2.146 \
+> crawler-8081.txt &
+		
+nohup java -jar crawler-service.jar \
+--server.port=8082 \
+--spring.cloud.nacos.discovery.ip=120.25.2.146 \
+> crawler-8082.txt &

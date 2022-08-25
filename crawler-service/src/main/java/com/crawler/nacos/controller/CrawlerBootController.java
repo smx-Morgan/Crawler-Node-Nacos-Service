@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Slf4j
-public class BootstrapController {
+public class CrawlerBootController {
 
     /**
      * 本方法用于接收主节点分配的url，并将url传递给爬虫系统进行工作
@@ -14,7 +14,8 @@ public class BootstrapController {
     @PostMapping("/task")
     public void receiveCrawlerTask(String url) {
         // todo
-        log.debug("收到URL任务：{}", url);
+        log.debug(">>>>>>>>>>>>>>>>>>爬虫节点收到URL任务：{}", url);
+
     }
 
 }
