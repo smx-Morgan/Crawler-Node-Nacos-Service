@@ -1,9 +1,12 @@
 package com.crawler.nacos.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Slf4j
+@Controller
 public class CrawlerBootController {
 
     /**
@@ -12,10 +15,11 @@ public class CrawlerBootController {
      * @param url 主节点分配的url
      */
     @PostMapping("/task")
-    public void receiveCrawlerTask(String url) {
+    @ResponseBody
+    public String receiveCrawlerTask(String url) {
         // todo
-        log.debug(">>>>>>>>>>>>>>>>>>爬虫节点收到URL任务：{}", url);
-
+        log.info(">>>>>>>>>>>>>>>>>>爬虫节点收到URL任务：{}", url);
+        return "Success";
     }
 
 }
