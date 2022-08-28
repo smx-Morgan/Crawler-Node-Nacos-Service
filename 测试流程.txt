@@ -1,0 +1,25 @@
+本项目3个模块：
+crawler-dispatcher: 调度器
+crawler-service: 爬虫节点
+feign-api: 以上两个模块都依赖的模块
+
+测试流程
+
+1. 启动crawler-service模块下的CrawlerApplication应用（爬虫节点）
+2. 启动crawler-dispatcher模块下的CrawlerDispatchApplication应用（调度器）
+3. 向CrawlerDispatchApplication应用的Controller发送http请求，使用postman或者别的，Controller的api如下：
+    @PostMapping("/search")
+    public void dispatchSearchTask(String url)
+
+你需要往http://localhost:8070/search发送post请求，携带参数为京东的url
+
+4. 观察输入，你应该看到如下内容：
+1）调度器控制台打印："发送任务：xxxxxxxx"
+2）爬虫节点控制台打印："收到任务：xxxxxxxx"
+3）过了一段时间，爬虫节点控制台打印："完成任务：xxxxxxxx"
+4）Redis中，键为crawlerTask，值为Hash的数据生成，Hash的内容是：[任务:是否完成]
+5）Redis有数据回写
+6）HBase有相应数据产生
+
+
+

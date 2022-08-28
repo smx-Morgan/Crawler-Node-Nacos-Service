@@ -10,7 +10,8 @@
 
     <modules>
         <module>crawler-service</module>
-        <module>crawler-consumer</module>
+        <module>crawler-dispatcher</module>
+        <module>feign-api</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -51,6 +52,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
             <!--nacos的管理依赖-->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
@@ -59,6 +61,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
     <dependencies>
