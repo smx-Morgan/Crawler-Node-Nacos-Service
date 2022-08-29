@@ -6,10 +6,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
 @RestController
 @Slf4j
@@ -25,21 +27,22 @@ public class CrawlerDispatchController {
     }
 
     @PostMapping("/search")
-    public void dispatchSearchTask(String url) {
-        createTaskAndDispatch(url);
+    public void dispatchSearchTask(@RequestParam("url") String url) {
+        createTaskAndDispatch(url, client::dispatchSearchTask);
     }
 
     @PostMapping("/item")
-    public void dispatchItemTask(String json) {
-        createTaskAndDispatch(json);
+    public void dispatchItemTask(@RequestParam("json") String json) {
+        createTaskAndDispatch(json, client::dispatchItemTask);
     }
 
-    void createTaskAndDispatch(String urlOrJson) {
-        TaskWrapper itemTask = TaskWrapper.newTask(urlOrJson);
-        registerTaskOnRedis(itemTask);
+    void createTaskAndDispatch(String urlOrJson, Consumer<String> client) {
+        TaskWrapper task = TaskWrapper.newTask(urlOrJson);
+
+        registerTaskOnRedis(task);
         CompletableFuture.runAsync(() -> {
-            client.dispatchItemTask(itemTask.toJson());
-            log.info("发送任务：{}", itemTask);
+            client.accept(task.toJson());
+            log.info("发送任务：{}", task);
         });
     }
 

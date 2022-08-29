@@ -26,8 +26,8 @@ public class TaskWrapper {
         this.metaData = urlOrJson;
     }
 
-    public static TaskWrapper newTask(String json) {
-        return new TaskWrapper(json);
+    public static TaskWrapper newTask(String metaData) {
+        return new TaskWrapper(metaData);
     }
 
     public static TaskWrapper fromJson(String json) {
