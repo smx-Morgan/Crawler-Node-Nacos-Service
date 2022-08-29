@@ -1,20 +1,18 @@
 package com.crawler.spider.processor.searchProcessor;
 
 import com.alibaba.fastjson.JSON;
-import com.crawler.node.store.UrlStorage;
+import com.crawler.node.store.RedisTemplateHolder;
 import com.crawler.spider.entity.SearchItemInfo;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.selector.Html;
 
-import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class JDSearchProcessor implements PageProcessor {
-    @Resource
-    UrlStorage urlStorage;
     private final Site site = Site
             .me()
             .setRetryTimes(3)
@@ -28,6 +26,9 @@ public class JDSearchProcessor implements PageProcessor {
         Html html = page.getHtml();
         // 获取本页所有商品信息 li
         List<String> text = html.$("div#J_goodsList > ul > li").all();
+
+        List<String> jsonCollector = new ArrayList<>();
+
         for (String items : text) {
             // 一条商品信息（li）
             Html oneItem = new Html(items);
@@ -40,12 +41,12 @@ public class JDSearchProcessor implements PageProcessor {
                 // 获取sku
                 String sku = psItem.$("img", "data-sku").toString();
 
-                String picurlAfter = psItem.$("img", "data-lazy-img").toString();
-                if ("".equals(picurlAfter) || picurlAfter == null) {
-                    picurlAfter = psItem.$("img", "data-lazy-img-slave").toString();
+                String picUrlAfter = psItem.$("img", "data-lazy-img").toString();
+                if ("".equals(picUrlAfter) || picUrlAfter == null) {
+                    picUrlAfter = psItem.$("img", "data-lazy-img-slave").toString();
                 }
                 // 获取商品图片
-                String pic = "https:" + picurlAfter;
+                String pic = "https:" + picUrlAfter;
                 // 详细页面的url
                 String url = "https://item.jd.com/" + sku + ".html";
                 SearchItemInfo searchItemInfo = new SearchItemInfo(spu, sku, pic, url);
@@ -55,12 +56,11 @@ public class JDSearchProcessor implements PageProcessor {
                 String jsonInfo = JSON.toJSONString(searchItemInfo);
 
                 // 提交
-                // 此处以输出代替
-                urlStorage.read(page.getRequest().getUrl(), jsonInfo);
-                //FlinkApi.bean.writeToRedis(jsonInfo);
-                System.out.println(jsonInfo);
+                jsonCollector.add(jsonInfo);
             }
         }
+
+        RedisTemplateHolder.bean.addList(page.getRequest().getUrl(), jsonCollector);
     }
 
     @Override

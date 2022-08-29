@@ -61,7 +61,7 @@ public class CrawlerDispatchController {
 
     void waitSearchResult(TaskWrapper task) {
         while (true) {
-            boolean done = Boolean.parseBoolean((String) redis.opsForHash().get(KEY_HASH_CRAWLER_TASK, task.getUuid()));
+            boolean done = Boolean.parseBoolean((String) redis.opsForHash().get(KEY_HASH_CRAWLER_TASK, task.toJson()));
             if (!done) {
                 Thread.yield();
             } else {
@@ -73,8 +73,10 @@ public class CrawlerDispatchController {
         List<String> jsonList = redis.opsForList().range(task.getMetaData(), 0, -1);
 
         if (jsonList == null || jsonList.isEmpty()) {
+            log.debug("爬虫任务标记为true，但未获取到list数据: {}", task);
             return;
         }
+        log.info("开始分发商品json, 数量为[{}], 来自于url=[{}]", jsonList.size(), task.getMetaData());
 
         jsonList.forEach(this::dispatchItemTask);
     }
