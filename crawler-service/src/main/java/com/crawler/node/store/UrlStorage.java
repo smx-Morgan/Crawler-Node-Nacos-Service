@@ -4,6 +4,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Set;
 
 @Component
@@ -12,7 +13,11 @@ public class UrlStorage {
     StringRedisTemplate stringRedisTemplate;
 
     public void read(String url, String json) {
-        stringRedisTemplate.opsForValue().set(url, json);
+        stringRedisTemplate.opsForList().leftPush(url, json);
+    }
+
+    public void creatList(String url) {
+        List list = stringRedisTemplate.opsForList().range(url, 0, 100);
     }
 
     public Set<String> getAllKey() {

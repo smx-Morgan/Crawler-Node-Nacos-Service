@@ -1,17 +1,20 @@
 package com.crawler.spider.processor.searchProcessor;
 
 import com.alibaba.fastjson.JSON;
-import com.crawler.node.util.FlinkApi;
+import com.crawler.node.store.UrlStorage;
 import com.crawler.spider.entity.SearchItemInfo;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.selector.Html;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 
 public class JDSearchProcessor implements PageProcessor {
+    @Resource
+    UrlStorage urlStorage;
     private final Site site = Site
             .me()
             .setRetryTimes(3)
@@ -50,9 +53,11 @@ public class JDSearchProcessor implements PageProcessor {
                 将该信息交给调度系统（开始）
                  */
                 String jsonInfo = JSON.toJSONString(searchItemInfo);
+
                 // 提交
                 // 此处以输出代替
-                FlinkApi.bean.writeToRedis(jsonInfo);
+                urlStorage.read(page.getRequest().getUrl(), jsonInfo);
+                //FlinkApi.bean.writeToRedis(jsonInfo);
                 System.out.println(jsonInfo);
             }
         }
