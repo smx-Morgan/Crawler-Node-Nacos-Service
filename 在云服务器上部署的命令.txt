@@ -1,48 +1,12 @@
-# ------kill------
-lsof -i:8081
-kill -9 p
-
-# ---node1---
-nohup java -jar crawler-service.jar \
---server.port=8081 \
-> crawler-8081.txt &
-		
-nohup java -jar crawler-service.jar \
---server.port=8082 \
-> crawler-8082.txt &
-
-nohup java -jar admin-server.jar \
---server.port=3795 \
-> admin.txt &
-
-# ---node2---
-nohup java -jar crawler-service.jar \
---server.port=8081 \
---spring.cloud.nacos.discovery.ip=114.115.233.128 \
-> crawler-8081.txt &
-		
-nohup java -jar crawler-service.jar \
---server.port=8082 \
---spring.cloud.nacos.discovery.ip=114.115.233.128 \
-> crawler-8082.txt &
-		
-# ---node3---
-nohup java -jar crawler-service.jar \
---server.port=8081 \
---spring.cloud.nacos.discovery.ip=120.25.2.146 \
-> crawler-8081.txt &
-		
-nohup java -jar crawler-service.jar \
---server.port=8082 \
---spring.cloud.nacos.discovery.ip=120.25.2.146 \
-> crawler-8082.txt &
+--- 部署命令 ---
+nohup java -jar crawler-node.jar \
+--spring.cloud.nacos.server-addr=你的ip \
+--server.port=你的端口 \
+> 你随意.txt &
 
 
-# ---------------
-项目打包：
-1.maven打包feign-api模块
-
-2.
-mvn install:install-file -Dfile=.\crawler-common-1.0.jar -DgroupId=com.crawler -DartifactId=crawler-common -Dversion=1.0 -Dpackaging=jar
-
-3.maven打包crawler-dispatcher, craw-service模块
+--- 实例 ---
+nohup java -jar crawler-node.jar \
+--spring.cloud.nacos.server-addr=166.66.66.66 \
+--server.port=2333 \
+> crawler-2333.txt &
