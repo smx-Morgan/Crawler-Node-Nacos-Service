@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.crawler</groupId>
-    <artifactId>nacos-demo</artifactId>
+    <artifactId>small-town-crawler</artifactId>
     <version>1.0</version>
 
     <modules>
-        <module>crawler-service</module>
+        <module>crawler-node</module>
         <module>crawler-dispatcher</module>
-        <module>feign-api</module>
+        <module>crawler-common</module>
     </modules>
 
     <packaging>pom</packaging>

@@ -2,7 +2,7 @@ server:
   port: 8081
 spring:
   application:
-    name: crawlerService
+    name: crawlerNode
   cloud:
     nacos:
       server-addr: 121.5.69.88:8848 # nacos服务地址

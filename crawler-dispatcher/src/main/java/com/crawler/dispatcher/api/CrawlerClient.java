@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient("crawlerService")
+@FeignClient("crawlerNode")
 public interface CrawlerClient {
     @GetMapping("/")
     String getStatus();

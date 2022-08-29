@@ -1,8 +1,8 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>nacos-demo</artifactId>
         <groupId>com.crawler</groupId>
+        <artifactId>small-town-crawler</artifactId>
         <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -17,6 +17,12 @@
     </properties>
 
     <dependencies>
+        <!-- crawler通用api -->
+        <dependency>
+            <groupId>com.crawler</groupId>
+            <artifactId>crawler-common</artifactId>
+            <version>1.0</version>
+        </dependency>
         <!-- redis -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -46,13 +52,6 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
         </dependency>
-
-        <!-- api统一模块 -->
-        <dependency>
-            <groupId>com.crawler</groupId>
-            <artifactId>feign-api</artifactId>
-            <version>1.0</version>
-        </dependency>
         <!-- admin server client-->
         <dependency>
             <groupId>de.codecentric</groupId>
@@ -81,7 +80,7 @@
     </dependencies>
 
     <build>
-        <finalName>crawler-service</finalName>
+        <finalName>crawler-dispatcher</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

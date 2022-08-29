@@ -4,14 +4,21 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>com.crawler</groupId>
-        <artifactId>nacos-demo</artifactId>
+        <artifactId>small-town-crawler</artifactId>
         <version>1.0</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>crawler-service</artifactId>
+    <artifactId>crawler-node</artifactId>
 
     <dependencies>
+        <!-- crawler通用api -->
+        <dependency>
+            <groupId>com.crawler</groupId>
+            <artifactId>crawler-common</artifactId>
+            <version>1.0</version>
+        </dependency>
+
         <!-- redis -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -55,11 +62,6 @@
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.crawler</groupId>
-            <artifactId>feign-api</artifactId>
-            <version>1.0</version>
         </dependency>
         <!--爬虫框架-->
         <dependency>
@@ -185,7 +187,7 @@
     </dependencies>
 
     <build>
-        <finalName>crawler-service</finalName>
+        <finalName>crawler-node</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

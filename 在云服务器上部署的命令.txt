@@ -43,6 +43,6 @@ nohup java -jar crawler-service.jar \
 1.maven打包feign-api模块
 
 2.
-mvn install:install-file -Dfile=.\feign-api-1.0.jar -DgroupId=com.crawler -DartifactId=feign-api -Dversion=1.0 -Dpackaging=jar
+mvn install:install-file -Dfile=.\crawler-common-1.0.jar -DgroupId=com.crawler -DartifactId=crawler-common -Dversion=1.0 -Dpackaging=jar
 
 3.maven打包crawler-dispatcher, craw-service模块
