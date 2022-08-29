@@ -1,8 +1,6 @@
 package com.crawler.spider.util;
 
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.downloader.HttpClientDownloader;
 import us.codecraft.webmagic.proxy.Proxy;
@@ -16,10 +14,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
 public class HttpUtil {
     // log4j日志记录，这里主要用于记录网页下载时间的信息
-    private static final Logger logger = LoggerFactory.getLogger(HttpUtil.class);
     // IP地址代理库
     /*
     ProxyProvider定位更多是一个“组件”，所以代理不再从Site设置，而是由HttpClientDownloader设置。
