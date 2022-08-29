@@ -48,6 +48,10 @@ public class CrawlerBootController {
             crawlerCode.accept(task);
             redis.opsForHash().put("crawlerTask", task.toJson(), "true");
             log.info("完成任务：{}", task);
+        }).whenComplete((unused, e) -> {
+            if (e != null) {
+                e.printStackTrace();
+            }
         });
     }
 

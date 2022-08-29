@@ -39,8 +39,8 @@ public class CrawlerDispatchController {
     }
 
     @PostMapping("/item")
-    public void dispatchItemTask(@RequestParam("json") String json) {
-        createTaskAndDispatch(json, client::dispatchItemTask);
+    public void dispatchItemTask(@RequestParam("json") String itemJson) {
+        createTaskAndDispatch(itemJson, client::dispatchItemTask);
     }
 
     TaskWrapper createTaskAndDispatch(String urlOrJson, Consumer<String> client) {

@@ -1,4 +1,4 @@
-package com.crawler.node.store;
+package com.crawler.node.holder;
 
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;

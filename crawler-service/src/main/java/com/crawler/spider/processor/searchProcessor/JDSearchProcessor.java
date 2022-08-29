@@ -1,7 +1,7 @@
 package com.crawler.spider.processor.searchProcessor;
 
-import com.alibaba.fastjson.JSON;
-import com.crawler.node.store.RedisTemplateHolder;
+import com.crawler.node.holder.GsonHolder;
+import com.crawler.node.holder.RedisTemplateHolder;
 import com.crawler.spider.entity.SearchItemInfo;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
@@ -53,7 +53,7 @@ public class JDSearchProcessor implements PageProcessor {
                 /*
                 将该信息交给调度系统（开始）
                  */
-                String jsonInfo = JSON.toJSONString(searchItemInfo);
+                String jsonInfo = GsonHolder.G.toJson(searchItemInfo);
 
                 // 提交
                 jsonCollector.add(jsonInfo);

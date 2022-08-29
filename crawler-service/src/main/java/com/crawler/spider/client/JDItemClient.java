@@ -1,6 +1,6 @@
 package com.crawler.spider.client;
 
-import com.alibaba.fastjson.JSON;
+import com.crawler.node.holder.GsonHolder;
 import com.crawler.spider.entity.Item;
 import com.crawler.spider.entity.SearchItemInfo;
 import com.crawler.spider.processor.itemProcessor.GetItem;
@@ -22,7 +22,7 @@ public class JDItemClient {
 
     public void getInfoByItem(String searchItemInfo) {
         // 爬取到的信息
-        SearchItemInfo info = JSON.parseObject(searchItemInfo, SearchItemInfo.class);
+        SearchItemInfo info = GsonHolder.G.fromJson(searchItemInfo, SearchItemInfo.class);
         Item item = new Item(info);
         item.setTitle(itemspider.getItemInfo(item.getUrl()));
         item.setPrice(Double.parseDouble(priceSpider.getPrice(item.getSku())));

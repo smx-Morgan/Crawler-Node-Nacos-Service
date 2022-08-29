@@ -1,9 +1,10 @@
 package com.crawler.spider.processor.priceProcessor;
 
-import com.alibaba.fastjson.JSON;
+import com.crawler.node.holder.GsonHolder;
 import com.crawler.spider.entity.JDPriceInfo;
 import lombok.Data;
 import lombok.SneakyThrows;
+import org.apache.hbase.thirdparty.com.google.common.reflect.TypeToken;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
@@ -37,7 +38,7 @@ public class JDPriceProcessor implements PageProcessor {
             throw new Exception("获取商品价格失败！");
         } else {
             String priceJson = page.getResultItems().get("JD_productPrice").toString().trim();
-            List<JDPriceInfo> jdPriceInfos = JSON.parseArray(priceJson, JDPriceInfo.class);
+            List<JDPriceInfo> jdPriceInfos = GsonHolder.G.fromJson(priceJson, new TypeToken<List<JDPriceInfo>>() {}.getType());
             priceInfo = jdPriceInfos.get(0);
         }
     }
