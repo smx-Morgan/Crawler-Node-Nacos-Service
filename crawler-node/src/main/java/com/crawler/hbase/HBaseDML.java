@@ -283,7 +283,10 @@ public class HBaseDML {
         /*createTable("Test","tableWithTTL","info");
         putCell("Test","tableWithTTL","0001","info","price","1000");*/
         // putCell("Test","tableWithTTL","0001","info","number","1500");
-        HBaseDDL.deleteTable("JDProducts", "Phones");
+        //HBaseDDL.deleteTable("JDProducts", "Phones");
+        //System.out.println(scanTable("JDProducts","Phones"));
+        ResultScanner scanner = scanTable("JDProducts", "Phones");
+        println(scanner);
         // System.out.println(isTableExists("JDProducts","Phones"));
        /* System.out.println("15:10");//3min后删除09插入一条||12插入一条
         Cell[] cellsAfter1 = getCells("Test","tableWithTTL","0001","info","price");
