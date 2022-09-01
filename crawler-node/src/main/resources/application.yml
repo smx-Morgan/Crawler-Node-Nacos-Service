@@ -5,7 +5,7 @@ spring:
     name: crawlerNode
   cloud:
     nacos:
-      server-addr: 121.5.69.88:8848 # nacos服务地址
+      server-addr:  # nacos服务地址
       discovery:
         ip: localhost # 此服务的公网ip
   boot:
@@ -15,7 +15,7 @@ spring:
 
   redis:
     # Redis服务器地址
-    host: 120.25.2.146
+    host:
     # Redis服务器端口
     port: 6379
     # Redis服务器密码
